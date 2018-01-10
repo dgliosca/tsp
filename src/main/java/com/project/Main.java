@@ -22,7 +22,8 @@ public class Main {
         Properties props = null;
         try {
             props = new Properties();
-            InputStream resourceAsStream = Main.class.getResourceAsStream(PROPERTIES_FILE);
+            ClassLoader classLoader = Main.class.getClassLoader();
+            InputStream resourceAsStream = classLoader.getResourceAsStream(PROPERTIES_FILE);
             if (resourceAsStream == null) {
                 throw new IllegalStateException("The file " + PROPERTIES_FILE + " is not there");
             }
