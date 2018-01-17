@@ -1,16 +1,21 @@
+package com.project
+
 import com.project.GA.GeneticAlgUtils
 import com.project.GA.GeneticAlgorithm
-import com.project.Main
+import com.project.Main.PROPERTIES_FILE
+import com.project.TSP.City
 import org.hamcrest.CoreMatchers.equalTo
-import org.junit.Assert.assertThat
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Test
 import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 import java.util.*
+import kotlin.math.roundToInt
 
-class AcceptanceTest {
+class AlgorithmTest {
 
-    @Test fun test() {
+    @Test
+    fun `tsp result is a repeatable known solution`() {
         GeneticAlgUtils.random = Random(2342432)
         GeneticAlgorithm.THREAD_CROSSOVER_NUM = 1
         GeneticAlgorithm.THREAD_FITNESS_NUM = 1
@@ -20,12 +25,12 @@ class AcceptanceTest {
         val appOutput = PrintStream(outContent)
         System.setOut(appOutput)
 
-        Main.main(arrayOf())
+        val tspResult = Main.runAlgorithm(PROPERTIES_FILE)
 
-        val actualResult = outContent.toString()
-        val distance = actualResult.split(" ").dropLast(1).last().toInt()
-        val observedDistance = 3867
+        assertThat(tspResult.totalDistance.roundToInt(), equalTo(3867))
 
-        assertThat(distance, equalTo(observedDistance))
+        val expectedCityNames = listOf("Rome", "Zurich", "Prague", "Berlin", "Amsterdam", "Bruxelles", "London", "Paris", "Lisbon", "Madrid")
+        assertThat(tspResult.cities.map { it.name }, equalTo(expectedCityNames))
     }
+
 }
