@@ -7,7 +7,6 @@ import com.project.TSP.City;
 import com.project.TSP.TSPGene;
 import com.project.TSP.TSPPopulation;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
@@ -17,15 +16,19 @@ public class Main {
     private static final String PROPERTIES_FILE = "TSP.properties";
 
     public static void main(String[] args) throws Exception {
+        runAlgorithm(PROPERTIES_FILE);
+    }
+
+    private static Chromosome runAlgorithm(String propertiesFile) throws Exception {
         System.out.println("TSP Genetic Algorithm");
         FileInputStream file = null;
         Properties props = null;
         try {
             props = new Properties();
             ClassLoader classLoader = Main.class.getClassLoader();
-            InputStream resourceAsStream = classLoader.getResourceAsStream(PROPERTIES_FILE);
+            InputStream resourceAsStream = classLoader.getResourceAsStream(propertiesFile);
             if (resourceAsStream == null) {
-                throw new IllegalStateException("The file " + PROPERTIES_FILE + " is not there");
+                throw new IllegalStateException("The file " + propertiesFile + " is not there");
             }
             props.load(resourceAsStream);
         } catch (Exception e) {
@@ -51,7 +54,9 @@ public class Main {
             System.out.print(city.getName() + " ");
         }
 
-        System.out.println("\n\nThe shortest tour distance is: " + Math.round(bestChromosome.getFitness()) + " miles");
+        double fitness = bestChromosome.getFitness();
+        System.out.println("\n\nThe shortest tour distance is: " + Math.round(fitness) + " miles");
+        return bestChromosome;
     }
 
 }
