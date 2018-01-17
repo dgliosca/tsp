@@ -12,10 +12,10 @@ public class GeneticAlgorithm {
     // THIS VALUE MUST BE EVEN
     public static final int POPULATION_SIZE = 1000;
 
-    public static final int THREAD_MUTATION_NUM = 2;
-    public static final int THREAD_CROSSOVER_NUM = 2;
-    public static final int THREAD_FITNESS_NUM = 2;
-    public static final int THREAD_SELECTION_NUM = 2;
+    public static int THREAD_MUTATION_NUM = 2;
+    public static int THREAD_CROSSOVER_NUM = 2;
+    public static int THREAD_FITNESS_NUM = 2;
+    public static int THREAD_SELECTION_NUM = 2;
 
     /**
         This method implements the Canonical Genetic Algorithm

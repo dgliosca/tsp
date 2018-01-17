@@ -3,7 +3,7 @@ import java.util.*;
 
 public class GeneticAlgUtils {
 
-    private static Random random = new Random();
+    public static Random random = new Random();
 
     public static double randomDouble(double max) {
         return random.nextDouble() * max;
